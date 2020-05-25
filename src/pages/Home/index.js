@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
+  repoListItemDesc: {
+    display: "flex",
+    flexDirection: "column",
+  },
 }));
 
 const octokit = new Octokit({});
@@ -58,7 +62,12 @@ function Home() {
                 <FolderOpenIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary={item.name} secondary={item.description} />
+            <div className={classes.repoListItemDesc}>
+              <ListItemText primary={item.name} secondary={item.description} />
+              <a href={item.html_url} target="_blank">
+                {item.html_url}
+              </a>
+            </div>
           </ListItem>
         ))}
       </List>
