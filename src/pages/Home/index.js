@@ -49,6 +49,20 @@ function Home() {
     loading: false,
     key: "",
   });
+
+  /**
+   * Seems like the concepts of hooks is not implemented here
+ * the correct way of using useState hook
+ */
+
+  // const [repos, setRepo] = useState([]);
+  // const [user, setUser] = useState(false);
+  // const [ownerName, setOwnerName] = useState("");
+  // const [fromDate, setFromDate] = useState(moment().subtract(1, "y"));
+  // const [toDate, setToDate] = useState(moment());
+  // const [loading, setLoading] = useState(false);
+  // const [key, setKey] = useState("");
+
   const contributions = _.chain(state.contributions)
     .map((item) => item.total)
     .reduce((acc, contribution) => acc + contribution, 0)
@@ -100,7 +114,7 @@ function Home() {
         </Button>
       </form>
 
-      {!_.isEmpty(state.repos) && (
+      {state.repos.length && (
         <div>
           <h4>Contributions for last one year</h4>
           {/* <form className={classes.container} noValidate>
@@ -131,7 +145,7 @@ function Home() {
       {state.loading && <CircularProgress />}
 
       <List component="nav" aria-label="main mailbox folders">
-        {_.map(state.repos, (item) => (
+        {state.repos ? state.repos.map(item => (
           <ListItem key={item.id}>
             <ListItemAvatar>
               <Avatar>
@@ -145,7 +159,7 @@ function Home() {
               </a>
             </div>
           </ListItem>
-        ))}
+        )) : "You do not have any repos"}
       </List>
     </section>
   );
